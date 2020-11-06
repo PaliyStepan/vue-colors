@@ -8,7 +8,7 @@
                         .burger__line.burger__line_center
                         .burger__line.burger__line_bottom
                 .header__left
-                    a.header__logo
+                    router-link(to="/").header__logo
                         img(src="../assets/img/logo.svg")
                 .header__menu(:class="{active : showMenu}")
                     .close-menu(@click="handleMenu")
@@ -81,8 +81,9 @@
         top: 0;
         left: 0;
         right: 0;
-        padding-top: 38px;
-        padding-bottom: 40px;
+        padding-top: 32px;
+        padding-bottom: 34px;
+        z-index: 20;
         &__inner {
             display: flex;
             align-items: center;
@@ -254,6 +255,7 @@
             height: 35px;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
         }
 
         .nav {
@@ -277,6 +279,7 @@
             width: 24px;
             height: 14px;
             position: relative;
+            cursor: pointer;
             &__line {
                 position: absolute;
                 width: 100%;

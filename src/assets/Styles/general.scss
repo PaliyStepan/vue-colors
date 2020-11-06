@@ -56,3 +56,19 @@ p {
   margin: 0 auto;
   padding: 0 15px;
 }
+
+.content{
+  padding-top: 104px;
+}
+
+.img-fluid {
+  width: 100%;
+  max-width: 100%;
+}
+
+
+@media only screen and (max-width: 1199px){
+  .content{
+    padding-top: 64px;
+  }
+}
