@@ -2,9 +2,25 @@
     .slider
         swiper.swiper(:options='swiperOption')
             swiper-slide
-                //.slider__item(:style="{'background-image': `url(${require('../assets/img/slide.png')})`}")
-                .slider__item
-                    img.slider__img(src="../assets/img/slide.png")
+                .slider__item(:style="{'background-image': `url(${require('../assets/img/slide.png')})`}")
+                    .slider__item--title Краски
+                    .slider__item--desc
+                        p
+                        | Идеально подходят
+                        | для стен и других поверхностей.
+                        br
+                        |  Найди свой идеальный цвет!
+            swiper-slide
+                .slider__item(:style="{'background-image': `url(${require('../assets/img/slide.png')})`}")
+                    .slider__item--title Краски
+                    .slider__item--desc
+                        p
+                        | Идеально подходят
+                        | для стен и других поверхностей.
+                        br
+                        |  Найди свой идеальный цвет!
+            swiper-slide
+                .slider__item(:style="{'background-image': `url(${require('../assets/img/slide.png')})`}")
                     .slider__item--title Краски
                     .slider__item--desc
                         p
@@ -99,7 +115,7 @@
         &__item--title{
             font-size: 72px;
             line-height: 63px;
-            margin-bottom: 24px;
+            margin-bottom: 11px;
         }
         &__item--desc{
             line-height: 21px;

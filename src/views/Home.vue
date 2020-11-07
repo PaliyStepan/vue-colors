@@ -1,18 +1,31 @@
 <template lang="pug">
-    slider
+    .content
+        .sec-slider
+            breadcrumbs
+            slider
+        products
 </template>
 
 <script>
     import Slider from "../components/Slider";
+    import Breadcrumbs from "../components/Breadcrumbs";
+    import Products from "../components/Catalog";
+
     export default {
 
         name: "Home",
         components: {
-            Slider
+            Slider,
+            Breadcrumbs,
+            Products
         },
     }
 </script>
 
-<style scoped>
+<style>
+    .sec-slider{
+        position: relative;
+    }
+
 
 </style>

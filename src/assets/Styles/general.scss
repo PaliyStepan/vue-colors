@@ -41,6 +41,11 @@ input {
   }
 }
 
+.fixed{
+  height: 100vh;
+  overflow: hidden;
+}
+
 h1, h2, h3, h4, h5, p {
   margin-top: 0;
 }
@@ -57,7 +62,7 @@ p {
   padding: 0 15px;
 }
 
-.content{
+.wrapper{
   padding-top: 104px;
 }
 
@@ -68,7 +73,15 @@ p {
 
 
 @media only screen and (max-width: 1199px){
-  .content{
+  .wrapper{
     padding-top: 64px;
+  }
+}
+
+
+@media only screen and (max-width: 575px){
+  .container{
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }

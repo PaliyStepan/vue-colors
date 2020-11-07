@@ -56,19 +56,17 @@
         methods: {
             handleMenu(){
                 this.showMenu = !this.showMenu;
-                console.log('rew')
-            },
-            // handleView(){
-            //     this.mobileView = window.innerWidth <= 1199;
-            // }
-        },
-        // created() {
-        //     this.handleView();
-        //     window.addEventListener("resize", this.handleView);
-        // },
-        // destroyed() {
-        //     window.removeEventListener("resize", this.handleView);
-        // },
+                let html = document.querySelector('html');
+
+                if (!html.classList.contains('fixed')) {
+                    html.classList.add('fixed')
+                } else {
+                    html.classList.remove('fixed')
+                }
+
+            }
+        }
+
     }
 </script>
 
@@ -160,6 +158,7 @@
             text-transform: uppercase;
             text-decoration: none;
             letter-spacing: 0.8px;
+            color: $black;
             &:hover{
                 text-decoration: underline;
             }
@@ -302,7 +301,17 @@
 
     @media only screen and (max-width: 1199px){
         .header{
-            padding: 20px 0;
+            padding: 0;
+            &__inner {
+                padding: 20px 0;
+            }
+        }
+    }
+    @media only screen and (max-width: 575px){
+        .header{
+           &__inner {
+               border-bottom: 1px solid rgba(#1F2020, 0.06);
+           }
         }
     }
 
