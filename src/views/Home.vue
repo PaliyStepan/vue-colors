@@ -3,13 +3,13 @@
         .sec-slider
             breadcrumbs
             slider
-        products
+        catalog
 </template>
 
 <script>
     import Slider from "../components/Slider";
     import Breadcrumbs from "../components/Breadcrumbs";
-    import Products from "../components/Catalog";
+    import Catalog from "../components/Catalog";
 
     export default {
 
@@ -17,7 +17,7 @@
         components: {
             Slider,
             Breadcrumbs,
-            Products
+            Catalog
         },
     }
 </script>

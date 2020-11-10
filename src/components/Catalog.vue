@@ -1,80 +1,114 @@
 <template lang="pug">
     .catalog
-        .bg-element(:class="{active : showFilters}" @click="handleFilters")
+        //.bg-element(:class="{active : showFilters}" @click="handleFilters")
         .container
             .grid
                 .grid__left(:class="{active : showFilters}")
                     aside.aside
                         .aside__trigger(v-show="showFilters" @click="handleFilters")
                         .products-filter
-                            .products-filter__item
-                                label.products-filter__label
-                                    input(type="checkbox").products-filter__input
-                                    .products-filter__checkbox
-                                    .products-filter__text Новинки
-                            .products-filter__item
-                                label.products-filter__label
-                                    input(type="checkbox").products-filter__input
-                                    .products-filter__checkbox
-                                    .products-filter__text Есть в наличии
-                            .products-filter__item
-                                label.products-filter__label
-                                    input(type="checkbox").products-filter__input
-                                    .products-filter__checkbox
-                                    .products-filter__text Контрактные
-                            .products-filter__item
-                                label.products-filter__label
-                                    input(type="checkbox").products-filter__input
-                                    .products-filter__checkbox
-                                    .products-filter__text Эксклюзивные
-                            .products-filter__item
-                                label.products-filter__label
-                                    input(type="checkbox").products-filter__input
-                                    .products-filter__checkbox
-                                    .products-filter__text Распродажа
+                            form.form(@change="sortByCategories")
+                                .products-filter__item
+                                    label.products-filter__label
+                                        input(value="new" type="checkbox" v-model="categories").products-filter__input
+                                        .products-filter__checkbox
+                                        .products-filter__text Новинки
+                                .products-filter__item
+                                    label.products-filter__label
+                                        input(value="available" type="checkbox" v-model="categories").products-filter__input
+                                        .products-filter__checkbox
+                                        .products-filter__text Есть в наличии
+                                .products-filter__item
+                                    label.products-filter__label
+                                        input(value="contract" type="checkbox" v-model="categories").products-filter__input
+                                        .products-filter__checkbox
+                                        .products-filter__text Контрактные
+                                .products-filter__item
+                                    label.products-filter__label
+                                        input(value="exclusive" type="checkbox" v-model="categories").products-filter__input
+                                        .products-filter__checkbox
+                                        .products-filter__text Эксклюзивные
+                                .products-filter__item
+                                    label.products-filter__label
+                                        input(value="sale" type="checkbox" v-model="categories").products-filter__input
+                                        .products-filter__checkbox
+                                        .products-filter__text Распродажа
                 .grid__right
-                    .products-info
-                        .products-info__left
-                            .products-info__filter-trigger(@click="handleFilters")
-                                | Фильтры
-                            .products-info__amount
-                                | 412 товаров
-                        .products-info__right
-
-                    .products-list
-                        .products-list__col(v-for="product in products")
-                            .products-list__item.product-item
-                                a(href="/").product-item__link
-                                    .product-item__img
-                                        img(:src=" require('../assets/img/products/' + product.image.first)").product-item__img_main
-                                        img(:src=" require('../assets/img/products/' + product.image.second)").product-item__img_hover
-                                    .product-item__name
-                                        | {{product.name}}
-                                    .product-item__article
-                                        | {{product.article}}
-                                .product-item__footer
-                                    .product-item__price
-                                        .product-item__price--span
-                                            | {{product.price}}
-                                        i &#8381;
-                                    .product-item__add
-                                        .product-item__button
-                                            img(src="../assets/img/plus.svg")
+                    .bg-element(:class="{active : showFilters}" @click="handleFilters")
+                    loader(v-show="isLoad")
+                    .products-wrap(v-show="!isLoad")
+                        .products-info
+                            .products-info__left
+                                .products-info__filter-trigger(@click="handleFilters")
+                                    | Фильтры
+                                .products-info__amount
+                                    | {{sortedProducts.length}} товаров
+                            .products-info__right
+                                v-select(:options="options" :selected="selected.name" @select="setFilters" @showBg="handleFilters" )
+                        .products-list
+                            .products-list__col(v-for="product in sortedProducts")
+                                .products-list__item.product-item(
+                                    :class="{'product-item__empty': !product.available, 'product-item__sale': product.sale}"
+                                    )
+                                    router-link(:to="'/product/'+ product.id").product-item__link
+                                        .product-item__img
+                                            img(:src=" require('../assets/img/products/' + product.image.first)").product-item__img_main
+                                            img(:src=" require('../assets/img/products/' + product.image.second)").product-item__img_hover
+                                        .product-item__name
+                                            | {{product.name}}
+                                        .product-item__article
+                                            | {{product.article}}
+                                    .product-item__footer
+                                        .product-item__price
+                                            .product-item__price--span
+                                                | {{product.price}}
+                                            i &#8381;
+                                        .product-item__add
+                                            .product-item__button
+                                                img(src="../assets/img/plus.svg")
+                                    .product-item__more
+                                        .product-item__rating
+                                            rating(:rate="product.popular")
+                                        .product-item__date {{product.date}}
 
 
 </template>
 
 <script>
     import  {mapGetters} from "vuex";
+    import vSelect from "./Select";
+    import Loader from "./Loader";
+    import Rating from "./Rating";
     export default {
         name: "Products",
+        components: {
+            vSelect,Loader,Rating
+        },
         data: ()=>({
             showFilters: false,
+            showMobileSorted: false,
+            options: [
+                {name: 'Сначала дорогие', type: 'price', order: 'desc'},
+                {name: 'Сначала недорогие', type: 'price', order: 'asc'},
+                {name: 'Сначала популярные', type: 'popular',order: 'desc'},
+                {name: 'Сначала новые', type: 'date',order: 'desc'}
+            ],
+            selected: {name: 'Сначала дорогие', type: 'price', order: 'desc'},
+            residualProducts: [],
+            categories: []
         }),
         computed: {
             ...mapGetters([
-                'products'
-            ])
+                'products',
+                'isLoad',
+            ]),
+            sortedProducts(){
+                if (this.residualProducts.length) {
+                    return this.residualProducts
+                } else {
+                    return this.products
+                }
+            }
         },
         methods: {
             handleFilters(){
@@ -86,8 +120,61 @@
                 } else {
                     html.classList.remove('fixed')
                 }
+            },
+            setFilters(category){
+
+                this.selected = category;
+
+                this.changeFilters();
+                // if (category.type == "price") {
+                //    this.sortedProducts.sort((a,b)=> a.price - b.price);
+                //     if (category.order == "desc") {
+                //         this.sortedProducts.reverse();
+                //     }
+                // }
+                // if (category.type == "popular") {
+                //    this.sortedProducts.sort((a,b)=> a.popular - b.popular);
+                //     this.sortedProducts.reverse();
+                // }
+                // if (category.type == "date") {
+                //
+                //     this.sortedProducts.sort((a,b)=> a.date.localeCompare(b.date));
+                //     this.sortedProducts.reverse();
+                // }
+            },
+            changeFilters(){
+                if (this.selected.type == "price") {
+                    this.sortedProducts.sort((a,b)=> a.price - b.price);
+                    if (this.selected.order == "desc") {
+                        this.sortedProducts.reverse();
+                    }
+                }
+                if (this.selected.type == "popular") {
+                    this.sortedProducts.sort((a,b)=> a.popular - b.popular);
+                    this.sortedProducts.reverse();
+                }
+                if (this.selected.type == "date") {
+                    this.sortedProducts.sort((a,b)=> a.date.localeCompare(b.date));
+                    this.sortedProducts.reverse();
+                }
+            },
+            sortByCategories(){
+                let newArray = [];
+                 newArray = this.products.filter(item=>{
+                    let check = 0;
+                    this.categories.forEach(obj => {
+                        if (item[obj] === true) {
+                            check++
+                        }
+                    });
+                    if ( this.categories.length === check) {
+                         return true
+                     }
+                });
+                this.residualProducts = newArray;
+                this.changeFilters();
             }
-        }
+        },
     }
 </script>
 
@@ -164,6 +251,10 @@
         }
     }
 
+    .products-wrap{
+        margin-top: -5px;
+    }
+
     .products-list{
         display: flex;
         margin: 0 -12px;
@@ -180,6 +271,52 @@
     .product-item{
         padding-bottom: 14px;
         border-bottom: 1px solid rgba(#000, 0.1);
+        overflow: hidden;
+        &__sale {
+            position: relative;
+            &:before {
+                content: 'Sale';
+                position: absolute;
+                pointer-events: none;
+                z-index: 2;
+                top: -10px;
+                left: -55px;
+                width: 150px;
+                height: 60px;
+                background-color: $green;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transform: rotate(-45deg);
+                padding-top: 15px;
+                font-size: 14px;
+            }
+        }
+        &__empty {
+            position: relative;
+            .product-item__button {
+                opacity: 0 !important;
+                pointer-events: none !important;
+            }
+            &:before {
+                pointer-events: none;
+                content: 'Временно нет';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background-color: rgba(#fff, 0.9);
+                z-index: 2;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #000;
+                font-size: 14px;
+                font-weight: bold;
+            }
+        }
         &:hover {
             .product-item__button {
                 opacity: 1;
@@ -235,6 +372,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            margin-bottom: 15px;
         }
         &__price {
             display: inline-flex;
@@ -269,6 +407,18 @@
 
 
     .products-info{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        z-index: 40;
+        margin-bottom: 40px;
+        &__amount{
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+        }
         &__filter-trigger {
             display: none;
         }
@@ -290,6 +440,9 @@
             pointer-events: auto;
         }
     }
+
+
+
 
 
 
@@ -382,6 +535,10 @@
         .products-info{
             &__filter-trigger {
                 display: block;
+                font-size: 12px;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
             }
             &__amount {
                 display: none;

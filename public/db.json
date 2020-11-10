@@ -8,7 +8,13 @@
       },
       "name": "Краска Wallquest, Brownsone",
       "article": "MS90102",
-      "price": 6000
+      "price": 6000,
+      "popular": 3,
+      "available": true,
+      "new": true,
+      "sale": false,
+      "contract": true,
+      "exclusive": true
     },
     {
       "id": 2,
@@ -18,7 +24,13 @@
       },
       "name": "Краска Wallquest, Brownsone",
       "article": "MS90102",
-      "price": 4800
+      "price": 4800,
+      "popular": 4,
+      "available": false,
+      "new": false,
+      "sale": false,
+      "contract": true,
+      "exclusive": true
     },
     {
       "id": 3,
@@ -28,7 +40,13 @@
       },
       "name": "Краска Wallquest, Brownsone",
       "article": "MS90102",
-      "price": 5290
+      "price": 5290,
+      "popular": 1,
+      "available": true,
+      "new": false,
+      "sale": true,
+      "contract": false,
+      "exclusive": true
     },
     {
       "id": 4,
@@ -38,7 +56,13 @@
       },
       "name": "Краска Wallquest, Brownsone",
       "article": "MS90102",
-      "price": 2800
+      "price": 2800,
+      "popular": 4,
+      "available": false,
+      "new": true,
+      "sale": false,
+      "contract": false,
+      "exclusive": false
     },
     {
       "id": 5,
@@ -48,7 +72,13 @@
       },
       "name": "Краска Wallquest, Brownsone",
       "article": "MS90102",
-      "price": 3400
+      "price": 3400,
+      "popular": 5,
+      "available": true,
+      "new": false,
+      "sale": false,
+      "contract": true,
+      "exclusive": false
     },
     {
       "id": 6,
@@ -58,7 +88,13 @@
       },
       "name": "Краска Wallquest, Brownsone",
       "article": "MS90102",
-      "price": 4560
+      "price": 4560,
+      "popular": 5,
+      "available": false,
+      "new": true,
+      "sale": true,
+      "contract": true,
+      "exclusive": true
     },
     {
       "id": 7,
@@ -68,7 +104,13 @@
       },
       "name": "Краска Wallquest, Brownsone",
       "article": "MS90102",
-      "price": 5555
+      "price": 5555,
+      "popular": 1,
+      "available": true,
+      "new": false,
+      "sale": false,
+      "contract": false,
+      "exclusive": true
     },
     {
       "id": 8,
@@ -78,7 +120,13 @@
       },
       "name": "Краска Wallquest, Brownsone",
       "article": "MS90102",
-      "price": 6270
+      "price": 6270,
+      "popular": 4,
+      "available": true,
+      "new": true,
+      "sale": false,
+      "contract": true,
+      "exclusive": false
     },
     {
       "id": 9,
@@ -88,7 +136,13 @@
       },
       "name": "Краска Wallquest, Brownsone",
       "article": "MS90102",
-      "price": 1200
+      "price": 1200,
+      "popular": 2,
+      "available": true,
+      "new": true,
+      "sale": false,
+      "contract": false,
+      "exclusive": false
     },
     {
       "id": 10,
@@ -98,7 +152,13 @@
       },
       "name": "Краска Wallquest, Brownsone",
       "article": "MS90102",
-      "price": 6000
+      "price": 6000,
+      "popular": 3,
+      "available": false,
+      "new": false,
+      "sale": false,
+      "contract": true,
+      "exclusive": true
     },
     {
       "id": 11,
@@ -108,7 +168,13 @@
       },
       "name": "Краска Wallquest, Brownsone",
       "article": "MS90102",
-      "price": 5100
+      "price": 5100,
+      "popular": 1,
+      "available": true,
+      "new": true,
+      "sale": true,
+      "contract": true,
+      "exclusive": false
     },
     {
       "id": 12,
@@ -118,7 +184,13 @@
       },
       "name": "Краска Wallquest, Brownsone",
       "article": "MS90102",
-      "price": 4500
+      "price": 4500,
+      "popular": 1,
+      "available": true,
+      "new": true,
+      "sale": false,
+      "contract": false,
+      "exclusive": true
     },
     {
       "id": 13,
@@ -128,7 +200,13 @@
       },
       "name": "Краска Wallquest, Brownsone",
       "article": "MS90102",
-      "price": 7800
+      "price": 7800,
+      "popular": 2,
+      "available": false,
+      "new": false,
+      "sale": false,
+      "contract": true,
+      "exclusive": true
     },
     {
       "id": 14,
@@ -138,18 +216,29 @@
       },
       "name": "Краска Wallquest, Brownsone",
       "article": "MS90102",
-      "price": 9000
+      "price": 9000,
+      "popular": 5,
+      "available": true,
+      "new": true,
+      "sale": false,
+      "contract": false,
+      "exclusive": false
     },
     {
       "id": 15,
       "image": {
-        "first" : "product_1.png",
+        "first": "product_1.png",
         "second" : "product_hover.png"
       },
       "name": "Краска Wallquest, Brownsone",
       "article": "MS90102",
-      "price": 6666
+      "price": 6666,
+      "popular": 4,
+      "available": true,
+      "new": true,
+      "sale": true,
+      "contract": true,
+      "exclusive": false
     }
-
   ]
 }

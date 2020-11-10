@@ -7,11 +7,265 @@
 
 <script>
     import AppHeader from "./components/Header";
-export default {
-  name: 'App',
-  components: {
-      AppHeader
-  }
+    import {mapActions} from "vuex";
+    export default {
+
+    name: 'App',
+    components: {
+        AppHeader
+    },
+    methods: {
+      ...mapActions([
+          'getProducts'
+      ])
+    },
+    mounted() {
+
+        let products = [
+            {
+                id: 1,
+                image: {
+                    first : "product_6.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                article: "",
+                price: 6000,
+                popular: 3,
+                date: '1996-03-30',
+                available: true,
+                new: true,
+                sale: false,
+                contract: true,
+                exclusive: true
+            },
+            {
+                id: 2,
+                image: {
+                    first : "product_1.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 4800,
+                popular: 4,
+                date: '2020-05-19',
+                available: false,
+                new: false,
+                sale: false,
+                contract: true,
+                exclusive: true
+            },
+            {
+                id: 3,
+                image: {
+                    first : "product_2.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 5290,
+                popular: 1,
+                date: '2010-01-01',
+                available: true,
+                new: false,
+                sale: true,
+                contract: false,
+                exclusive: true
+            },
+            {
+                id: 4,
+                image: {
+                    first : "product_3.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 2800,
+                popular: 4,
+                date: '2018-12-31',
+                available: false,
+                new: true,
+                sale: false,
+                contract: false,
+                exclusive: false
+            },
+            {
+                id: 5,
+                image: {
+                    first : "product_4.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 3400,
+                popular: 5,
+                date: '2000-04-03',
+                available: true,
+                new: false,
+                sale: false,
+                contract: true,
+                exclusive: false
+            },
+            {
+                id: 6,
+                image: {
+                    first : "product_5.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 4560,
+                popular: 5,
+                date: '2019-11-19',
+                available: false,
+                new: true,
+                sale: false,
+                contract: true,
+                exclusive: true
+            },
+            {
+                id: 7,
+                image: {
+                    first : "product_6.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 5555,
+                popular: 1,
+                date: '1999-08-09',
+                available: true,
+                new: false,
+                sale: false,
+                contract: false,
+                exclusive: true
+            },
+            {
+                id: 8,
+                image: {
+                    first : "product_7.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 6270,
+                popular: 4,
+                date: '2005-03-11',
+                available: true,
+                new: true,
+                sale: false,
+                contract: true,
+                exclusive: false
+            },
+            {
+                id: 9,
+                image: {
+                    first : "product_8.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 1200,
+                popular: 2,
+                date: '2024-04-01',
+                available: true,
+                new: true,
+                sale: true,
+                contract: false,
+                exclusive: false
+            },
+            {
+                id: 10,
+                image: {
+                    first : "product_9.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 6000,
+                popular: 3,
+                date: '2010-05-19',
+                available: false,
+                new: false,
+                sale: false,
+                contract: true,
+                exclusive: true
+            },
+            {
+                id: 11,
+                image: {
+                    first : "product_6.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 5100,
+                popular: 1,
+                date: '2020-05-19',
+                available: true,
+                new: true,
+                sale: true,
+                contract: true,
+                exclusive: false
+            },
+            {
+                id: 12,
+                image: {
+                    first : "product_7.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 4500,
+                popular: 1,
+                date: '2011-05-19',
+                available: true,
+                new: true,
+                sale: false,
+                contract: false,
+                exclusive: true
+            },
+            {
+                id: 13,
+                image: {
+                    first : "product_8.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 7800,
+                popular: 2,
+                date: '2021-05-17',
+                available: false,
+                new: false,
+                sale: false,
+                contract: true,
+                exclusive: true
+            },
+            {
+                id: 14,
+                image: {
+                    first : "product_9.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 9000,
+                popular: 5,
+                date: '2020-04-10',
+                available: true,
+                new: true,
+                sale: false,
+                contract: false,
+                exclusive: false
+            },
+            {
+                id: 15,
+                image: {
+                    first: "product_1.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 6666,
+                popular: 4,
+                date: '2003-02-11',
+                available: true,
+                new: true,
+                sale: true,
+                contract: true,
+                exclusive: false
+            }
+        ];
+        this.$store.dispatch('getProducts', products);
+    }
 }
 </script>
 
