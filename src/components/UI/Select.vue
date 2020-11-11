@@ -1,9 +1,9 @@
 <template lang="pug">
-    .select
+    .select(:class="{active: isVisible}")
         .select__trigger
             .select__title(@click="showList")
                 | {{selected}}
-            img(src="../assets/img/arrow.svg")
+            img(src="../../assets/img/arrow.svg")
         .select__list(v-show="isVisible")
             .select__item(
                 v-for="option in options"
@@ -58,9 +58,13 @@
 </script>
 
 <style lang="scss">
-    @import "../assets/Styles/vars";
+    @import "../../assets/Styles/vars";
     .select{
         position: relative;
+        &.active{
+            position: relative;
+            z-index: 45;
+        }
         &__bg {
             position: fixed;
             top: 0;

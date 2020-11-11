@@ -18,7 +18,7 @@
 </script>
 
 <style lang="scss">
-    @import "../assets/Styles/vars";
+    @import "../../assets/Styles/vars";
 
     .rating{
         display: flex;

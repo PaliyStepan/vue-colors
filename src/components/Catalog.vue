@@ -64,21 +64,23 @@
                                                 | {{product.price}}
                                             i &#8381;
                                         .product-item__add
-                                            .product-item__button
+                                            .product-item__button(@click="addToCart(product)")
                                                 img(src="../assets/img/plus.svg")
                                     .product-item__more
                                         .product-item__rating
                                             rating(:rate="product.popular")
                                         .product-item__date {{product.date}}
+                                        .product-item__incart(v-if="product.quantity > 0")
+                                            | В корзине {{product.quantity}} шт.
 
 
 </template>
 
 <script>
     import  {mapGetters} from "vuex";
-    import vSelect from "./Select";
-    import Loader from "./Loader";
-    import Rating from "./Rating";
+    import vSelect from "./UI/Select";
+    import Loader from "./UI/Loader";
+    import Rating from "./UI/Rating";
     export default {
         name: "Products",
         components: {
@@ -97,6 +99,7 @@
             residualProducts: [],
             categories: []
         }),
+
         computed: {
             ...mapGetters([
                 'products',
@@ -122,25 +125,8 @@
                 }
             },
             setFilters(category){
-
                 this.selected = category;
-
                 this.changeFilters();
-                // if (category.type == "price") {
-                //    this.sortedProducts.sort((a,b)=> a.price - b.price);
-                //     if (category.order == "desc") {
-                //         this.sortedProducts.reverse();
-                //     }
-                // }
-                // if (category.type == "popular") {
-                //    this.sortedProducts.sort((a,b)=> a.popular - b.popular);
-                //     this.sortedProducts.reverse();
-                // }
-                // if (category.type == "date") {
-                //
-                //     this.sortedProducts.sort((a,b)=> a.date.localeCompare(b.date));
-                //     this.sortedProducts.reverse();
-                // }
             },
             changeFilters(){
                 if (this.selected.type == "price") {
@@ -173,6 +159,9 @@
                 });
                 this.residualProducts = newArray;
                 this.changeFilters();
+            },
+            addToCart(product){
+                this.$store.dispatch('addToCart', product)
             }
         },
     }
@@ -403,6 +392,15 @@
                 background-color: $green;
             }
         }
+        &__more {
+            position: relative;
+        }
+        &__incart{
+            position: absolute;
+            top: -5px;
+            right: 0;
+            font-size: 13px;
+        }
     }
 
 
@@ -411,7 +409,6 @@
         align-items: center;
         justify-content: space-between;
         position: relative;
-        z-index: 40;
         margin-bottom: 40px;
         &__amount{
             font-size: 12px;
@@ -564,6 +561,10 @@
             padding-bottom: 34px;
             &__link {
                 margin-bottom: 20px;
+            }
+            &__incart{
+                top: auto;
+                bottom: -22px;
             }
         }
     }

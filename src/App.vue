@@ -1,23 +1,34 @@
 <template lang="pug">
     #app
-        app-header
+        modal(:showCart="showCart" @changeShowCart="toggleCart")
+            cart
+        app-header(@changeShowCart="toggleCart")
         .wrapper
             router-view
 </template>
 
 <script>
     import AppHeader from "./components/Header";
+    import Cart from "./components/Cart";
+    import Modal from "./components/UI/Modal";
     import {mapActions} from "vuex";
+
     export default {
 
     name: 'App',
     components: {
-        AppHeader
+        AppHeader, Cart, Modal
     },
+    data: ()=>({
+        showCart: false
+    }),
     methods: {
       ...mapActions([
           'getProducts'
-      ])
+      ]),
+        toggleCart(){
+          this.showCart = !this.showCart;
+        }
     },
     mounted() {
 
@@ -37,7 +48,8 @@
                 new: true,
                 sale: false,
                 contract: true,
-                exclusive: true
+                exclusive: true,
+                quantity: 0
             },
             {
                 id: 2,
@@ -53,7 +65,8 @@
                 new: false,
                 sale: false,
                 contract: true,
-                exclusive: true
+                exclusive: true,
+                quantity: 0
             },
             {
                 id: 3,
@@ -69,7 +82,8 @@
                 new: false,
                 sale: true,
                 contract: false,
-                exclusive: true
+                exclusive: true,
+                quantity: 0
             },
             {
                 id: 4,
@@ -85,7 +99,8 @@
                 new: true,
                 sale: false,
                 contract: false,
-                exclusive: false
+                exclusive: false,
+                quantity: 0
             },
             {
                 id: 5,
@@ -101,7 +116,8 @@
                 new: false,
                 sale: false,
                 contract: true,
-                exclusive: false
+                exclusive: false,
+                quantity: 0
             },
             {
                 id: 6,
@@ -117,7 +133,8 @@
                 new: true,
                 sale: false,
                 contract: true,
-                exclusive: true
+                exclusive: true,
+                quantity: 0
             },
             {
                 id: 7,
@@ -133,7 +150,8 @@
                 new: false,
                 sale: false,
                 contract: false,
-                exclusive: true
+                exclusive: true,
+                quantity: 0
             },
             {
                 id: 8,
@@ -149,7 +167,8 @@
                 new: true,
                 sale: false,
                 contract: true,
-                exclusive: false
+                exclusive: false,
+                quantity: 0
             },
             {
                 id: 9,
@@ -165,7 +184,8 @@
                 new: true,
                 sale: true,
                 contract: false,
-                exclusive: false
+                exclusive: false,
+                quantity: 0
             },
             {
                 id: 10,
@@ -181,7 +201,8 @@
                 new: false,
                 sale: false,
                 contract: true,
-                exclusive: true
+                exclusive: true,
+                quantity: 0
             },
             {
                 id: 11,
@@ -197,7 +218,8 @@
                 new: true,
                 sale: true,
                 contract: true,
-                exclusive: false
+                exclusive: false,
+                quantity: 0
             },
             {
                 id: 12,
@@ -213,7 +235,8 @@
                 new: true,
                 sale: false,
                 contract: false,
-                exclusive: true
+                exclusive: true,
+                quantity: 0
             },
             {
                 id: 13,
@@ -229,7 +252,8 @@
                 new: false,
                 sale: false,
                 contract: true,
-                exclusive: true
+                exclusive: true,
+                quantity: 0
             },
             {
                 id: 14,
@@ -245,7 +269,8 @@
                 new: true,
                 sale: false,
                 contract: false,
-                exclusive: false
+                exclusive: false,
+                quantity: 0
             },
             {
                 id: 15,
@@ -261,7 +286,8 @@
                 new: true,
                 sale: true,
                 contract: true,
-                exclusive: false
+                exclusive: false,
+                quantity: 0
             }
         ];
         this.$store.dispatch('getProducts', products);

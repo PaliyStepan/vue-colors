@@ -8,7 +8,7 @@
 
 <script>
     import Slider from "../components/Slider";
-    import Breadcrumbs from "../components/Breadcrumbs";
+    import Breadcrumbs from "../components/UI/Breadcrumbs";
     import Catalog from "../components/Catalog";
 
     export default {

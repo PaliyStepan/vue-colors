@@ -11,7 +11,7 @@
 </script>
 
 <style lang="scss">
-    @import "../assets/Styles/vars";
+    @import "../../assets/Styles/vars";
     .loader{
         text-align: center;
     }

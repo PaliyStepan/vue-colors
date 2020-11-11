@@ -35,12 +35,14 @@
                                 router-link(to="/").user-sec__link
                                     img(src="../assets/img/heart.svg").user-sec__img
                 .header__cart
-                    .header__cart--count 0
+                    .header__cart--count(@click="changeShowCart")
+                        | {{cartLength}}
 
 
 </template>
 
 <script>
+    import  {mapGetters} from "vuex";
     export default {
         name: "Header",
         data:()=>({
@@ -54,6 +56,9 @@
             ],
         }),
         methods: {
+            changeShowCart(){
+                this.$emit('changeShowCart');
+            },
             handleMenu(){
                 this.showMenu = !this.showMenu;
                 let html = document.querySelector('html');
@@ -63,8 +68,12 @@
                 } else {
                     html.classList.remove('fixed')
                 }
-
             }
+        },
+        computed:{
+            ...mapGetters([
+                'cartLength'
+            ])
         }
 
     }
@@ -132,6 +141,7 @@
             align-items: center;
             justify-content: center;
             font-size: 12px;
+            cursor: pointer;
         }
     }
 
