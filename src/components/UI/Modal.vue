@@ -18,16 +18,21 @@
         methods: {
             handleShow(){
                 this.$emit('changeShowCart')
+            },
+            checkVisible(){
+
+                let html = document.querySelector('html');
+
+                if (this.showCart) {
+                    html.classList.add('fixed')
+                } else {
+                    html.classList.remove('fixed')
+                }
+
             }
         },
         updated() {
-            let html = document.querySelector('html');
-
-            if (!html.classList.contains('fixed')) {
-                html.classList.add('fixed')
-            } else {
-                html.classList.remove('fixed')
-            }
+            this.checkVisible();
         }
     }
 </script>

@@ -86,7 +86,7 @@ export default new Vuex.Store({
         setTimeout(()=>{
           state.commit('loadingToggle');
           state.commit('setProductsToState',payload);
-        },150)
+        },2000)
       },
       addToCart(state, product) {
         state.commit('setCart', product)

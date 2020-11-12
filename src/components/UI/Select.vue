@@ -46,6 +46,8 @@
             showList(){
                 this.isVisible = true;
                 this.$emit('showBg');
+                let html = document.querySelector('html');
+                html.classList.add('fixed')
             }
         },
         mounted() {

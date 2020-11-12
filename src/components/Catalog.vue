@@ -1,6 +1,5 @@
 <template lang="pug">
     .catalog
-        //.bg-element(:class="{active : showFilters}" @click="handleFilters")
         .container
             .grid
                 .grid__left(:class="{active : showFilters}")
@@ -34,7 +33,7 @@
                                         .products-filter__checkbox
                                         .products-filter__text Распродажа
                 .grid__right
-                    .bg-element(:class="{active : showFilters}" @click="handleFilters")
+                    .bg-element(:class="{active : showBgElement}" @click="hidePopupElements")
                     loader(v-show="isLoad")
                     .products-wrap(v-show="!isLoad")
                         .products-info
@@ -44,9 +43,9 @@
                                 .products-info__amount
                                     | {{sortedProducts.length}} товаров
                             .products-info__right
-                                v-select(:options="options" :selected="selected.name" @select="setFilters" @showBg="handleFilters" )
+                                v-select(:options="options" :selected="selected.name" @select="setSorted" @showBg="handleShowSort")
                         .products-list
-                            .products-list__col(v-for="product in sortedProducts")
+                            .products-list__col(v-for="product in paginatedProducts")
                                 .products-list__item.product-item(
                                     :class="{'product-item__empty': !product.available, 'product-item__sale': product.sale}"
                                     )
@@ -72,6 +71,13 @@
                                         .product-item__date {{product.date}}
                                         .product-item__incart(v-if="product.quantity > 0")
                                             | В корзине {{product.quantity}} шт.
+                            .pagination(v-show="pages > 1")
+                                .pagination__item(v-for="page in pages"
+                                    @click="setPageNumber(page)"
+                                    :key="page"
+                                    :class="{active: page  === pageNumber}"
+                                )
+                                    | {{page}}
 
 
 </template>
@@ -87,6 +93,7 @@
             vSelect,Loader,Rating
         },
         data: ()=>({
+            showBgElement: false,
             showFilters: false,
             showMobileSorted: false,
             options: [
@@ -95,9 +102,11 @@
                 {name: 'Сначала популярные', type: 'popular',order: 'desc'},
                 {name: 'Сначала новые', type: 'date',order: 'desc'}
             ],
-            selected: {name: 'Сначала дорогие', type: 'price', order: 'desc'},
+            selected: {name: 'Сортировка'},
             residualProducts: [],
-            categories: []
+            categories: [],
+            productPerPage: 10,
+            pageNumber: 1
         }),
 
         computed: {
@@ -111,22 +120,39 @@
                 } else {
                     return this.products
                 }
+            },
+            paginatedProducts(){
+                let from =  (this.pageNumber - 1) * this.productPerPage;
+                let to = from + this.productPerPage;
+
+                return this.sortedProducts.slice(from, to)
+            },
+            pages(){
+                return Math.ceil(this.sortedProducts.length / this.productPerPage)
             }
         },
         methods: {
-            handleFilters(){
-                this.showFilters = !this.showFilters;
+            htmlFixed(){
                 let html = document.querySelector('html');
-
                 if (!html.classList.contains('fixed')) {
                     html.classList.add('fixed')
                 } else {
                     html.classList.remove('fixed')
                 }
             },
-            setFilters(category){
+            handleFilters(){
+                this.showFilters = !this.showFilters;
+                this.showBgElement = !this.showBgElement;
+                this.htmlFixed();
+            },
+            handleShowSort(){
+                this.showBgElement = !this.showBgElement;
+            },
+            setSorted(category){
                 this.selected = category;
                 this.changeFilters();
+                this.htmlFixed();
+                this.setPageNumber(1);
             },
             changeFilters(){
                 if (this.selected.type == "price") {
@@ -159,9 +185,24 @@
                 });
                 this.residualProducts = newArray;
                 this.changeFilters();
+                this.setPageNumber(1);
             },
             addToCart(product){
                 this.$store.dispatch('addToCart', product)
+            },
+            hidePopupElements(){
+                this.showBgElement = !this.showBgElement;
+                if (this.showFilters) this.showFilters = !this.showFilters;
+
+                let html = document.querySelector('html');
+                if (!html.classList.contains('fixed')) {
+                    html.classList.add('fixed')
+                } else {
+                    html.classList.remove('fixed')
+                }
+            },
+            setPageNumber(page){
+                this.pageNumber = page;
             }
         },
     }
@@ -170,8 +211,31 @@
 <style lang="scss">
 
     @import "../assets/Styles/vars";
+
+    .pagination{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 60px;
+        &__item {
+            width: 40px;
+            height: 40px;
+            background-color: $gray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin: 0 5px;
+            &.active{
+                background-color: $green;
+                color: #fff;
+            }
+        }
+    }
     .catalog {
         padding-top: 72px;
+        padding-bottom: 130px;
     }
     .grid{
         display: flex;
@@ -536,6 +600,7 @@
                 font-weight: 500;
                 text-transform: uppercase;
                 letter-spacing: 0.06em;
+                cursor: pointer;
             }
             &__amount {
                 display: none;

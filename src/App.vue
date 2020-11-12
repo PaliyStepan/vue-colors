@@ -4,7 +4,9 @@
             cart
         app-header(@changeShowCart="toggleCart")
         .wrapper
-            router-view
+            main.main
+                router-view
+            app-footer
 </template>
 
 <script>
@@ -12,12 +14,13 @@
     import Cart from "./components/Cart";
     import Modal from "./components/UI/Modal";
     import {mapActions} from "vuex";
+    import AppFooter from "./components/Footer";
 
     export default {
 
     name: 'App',
     components: {
-        AppHeader, Cart, Modal
+        AppHeader, Cart, Modal, AppFooter
     },
     data: ()=>({
         showCart: false
@@ -285,6 +288,262 @@
                 available: true,
                 new: true,
                 sale: true,
+                contract: true,
+                exclusive: false,
+                quantity: 0
+            },
+            {
+                id: 16,
+                image: {
+                    first : "product_6.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                article: "",
+                price: 6500,
+                popular: 4,
+                date: '1991-03-30',
+                available: true,
+                new: true,
+                sale: false,
+                contract: true,
+                exclusive: true,
+                quantity: 0
+            },
+            {
+                id: 17,
+                image: {
+                    first : "product_4.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 4301,
+                popular: 4,
+                date: '2021-05-19',
+                available: false,
+                new: false,
+                sale: false,
+                contract: true,
+                exclusive: true,
+                quantity: 0
+            },
+            {
+                id: 18,
+                image: {
+                    first : "product_1.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 4517,
+                popular: 1,
+                date: '2017-01-10',
+                available: true,
+                new: false,
+                sale: true,
+                contract: false,
+                exclusive: true,
+                quantity: 0
+            },
+            {
+                id: 19,
+                image: {
+                    first : "product_5.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 7850,
+                popular: 2,
+                date: '2014-11-31',
+                available: false,
+                new: true,
+                sale: false,
+                contract: false,
+                exclusive: false,
+                quantity: 0
+            },
+            {
+                id: 20,
+                image: {
+                    first : "product_4.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 3400,
+                popular: 5,
+                date: '2000-04-03',
+                available: true,
+                new: false,
+                sale: false,
+                contract: true,
+                exclusive: false,
+                quantity: 0
+            },
+            {
+                id: 21,
+                image: {
+                    first : "product_5.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 4687,
+                popular: 3,
+                date: '2010-10-19',
+                available: false,
+                new: true,
+                sale: false,
+                contract: true,
+                exclusive: true,
+                quantity: 0
+            },
+            {
+                id: 21,
+                image: {
+                    first : "product_6.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 6650,
+                popular: 5,
+                date: '1996-08-09',
+                available: true,
+                new: false,
+                sale: false,
+                contract: false,
+                exclusive: true,
+                quantity: 0
+            },
+            {
+                id: 22,
+                image: {
+                    first : "product_7.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 9988,
+                popular: 1,
+                date: '2015-03-11',
+                available: true,
+                new: true,
+                sale: false,
+                contract: true,
+                exclusive: false,
+                quantity: 0
+            },
+            {
+                id: 23,
+                image: {
+                    first : "product_8.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 1300,
+                popular: 2,
+                date: '2010-07-01',
+                available: true,
+                new: true,
+                sale: true,
+                contract: false,
+                exclusive: false,
+                quantity: 0
+            },
+            {
+                id: 24,
+                image: {
+                    first : "product_9.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 7150,
+                popular: 2,
+                date: '2011-03-19',
+                available: false,
+                new: false,
+                sale: false,
+                contract: true,
+                exclusive: true,
+                quantity: 0
+            },
+            {
+                id: 25,
+                image: {
+                    first : "product_6.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 5850,
+                popular: 1,
+                date: '2013-06-11',
+                available: true,
+                new: true,
+                sale: true,
+                contract: true,
+                exclusive: false,
+                quantity: 0
+            },
+            {
+                id: 26,
+                image: {
+                    first : "product_7.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 3200,
+                popular: 2,
+                date: '2014-07-14',
+                available: true,
+                new: true,
+                sale: false,
+                contract: false,
+                exclusive: true,
+                quantity: 0
+            },
+            {
+                id: 27,
+                image: {
+                    first : "product_8.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 1420,
+                popular: 3,
+                date: '2020-01-17',
+                available: false,
+                new: false,
+                sale: false,
+                contract: true,
+                exclusive: true,
+                quantity: 0
+            },
+            {
+                id: 28,
+                image: {
+                    first : "product_9.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 9150,
+                popular: 4,
+                date: '2021-01-10',
+                available: true,
+                new: true,
+                sale: false,
+                contract: false,
+                exclusive: false,
+                quantity: 0
+            },
+            {
+                id: 29,
+                image: {
+                    first: "product_1.png",
+                    second : "product_hover.png"
+                },
+                name: "Краска Wallquest, Brownsone MS90102",
+                price: 6666,
+                popular: 5,
+                date: '2000-02-11',
+                available: false,
+                new: true,
+                sale: false,
                 contract: true,
                 exclusive: false,
                 quantity: 0
